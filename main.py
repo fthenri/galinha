@@ -1,12 +1,17 @@
 import flet as ft
+from logic.galo import Galo
+from logic.jogador import Jogador
+from screens.perfil import criar_tela_perfil
 
 def main(page: ft.Page):
     page.title = "Rinha Offline"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
-    texto_inicial = ft.Text("Bem-vindo à Rinha Offline!", size=30)
-    
-    page.add(texto_inicial)
+    meu_galo = Galo("Pintinho Inicial", 100, 15, 5, "assets/galos/00_2.png")
+    meu_jogador = Jogador("Henrique")
+    meu_jogador.adicionar_galo(meu_galo)
+
+    tela = criar_tela_perfil(meu_jogador)
+    page.add(tela)
 
 ft.run(main)
