@@ -1,20 +1,19 @@
 import flet as ft
 import asyncio
-import random # Adicionado para sortear inimigos
+import random
 from logic.galo import Galo
+from data.galos_db import GALOS_DB # Importação do banco de galos
 
-def criar_tela_rinha(jogador, page): 
+def criar_tela_rinha(jogador, page):
     if not jogador.galo_ativo:
         return ft.Text("Equipe um galo no perfil primeiro!")
-
+        
     meu_galo = jogador.galo_ativo
-    inimigo = Galo("Galo Robô", 100, 12, 3, "assets/galos/010_2.png")
+    inimigo = Galo("Dummy", 100, 10, 5, "assets/galos/00_2.png")
     
     meu_galo.hp_atual = meu_galo.hp_max 
-
     texto_log = ft.Text("Procurando oponente...", size=14)
     
-    # UI extraída para variáveis para podermos alterar dinamicamente
     texto_nome_meu = ft.Text(f"{jogador.nome} Level {meu_galo.nivel}", weight=ft.FontWeight.BOLD)
     texto_hp_meu = ft.Text(f"{meu_galo.hp_atual}/{meu_galo.hp_max}", size=12)
     barra_hp_meu = ft.ProgressBar(value=1.0, color=ft.Colors.GREEN, width=150)
@@ -23,7 +22,7 @@ def criar_tela_rinha(jogador, page):
     texto_hp_inimigo = ft.Text(f"{inimigo.hp_atual}/{inimigo.hp_max}", size=12)
     barra_hp_inimigo = ft.ProgressBar(value=1.0, color=ft.Colors.PURPLE, width=150)
     imagem_inimigo = ft.Image(src=inimigo.caminho_imagem, height=200, fit="contain")
-
+    
     seletor_vel = ft.Dropdown(
         label="Velocidade do Treino",
         options=[
@@ -34,7 +33,7 @@ def criar_tela_rinha(jogador, page):
         value="1.0",
         width=200
     )
-
+    
     arena = ft.Container(
         bgcolor=ft.Colors.BLACK_87,
         padding=15,
@@ -74,16 +73,26 @@ def criar_tela_rinha(jogador, page):
             pass 
 
     async def loop_batalha():
-        # Loop infinito para sequenciar as batalhas
         while arena.page is not None:
-            # Sorteia um novo inimigo a cada ciclo
-            imagens = [f"assets/galos/01{i}_2.png" for i in range(0, 9)] + ["assets/galos/00_2.png"]
-            inimigo.nome = f"Selvagem {random.randint(1, 99)}"
-            inimigo.caminho_imagem = random.choice(imagens)
-            inimigo.hp_atual = inimigo.hp_max
-            meu_galo.hp_atual = meu_galo.hp_max # Recupera a tua vida para a próxima luta
+            # Sorteio do inimigo baseado no DB e nível do jogador
+            nome_sorteado = random.choice(list(GALOS_DB.keys()))
+            dados_inimigo = GALOS_DB[nome_sorteado]
+            nivel_inimigo = max(1, meu_galo.nivel + random.randint(-1, 2))
             
-            texto_log.value = f"Um {inimigo.nome} apareceu!"
+            inimigo.nome = nome_sorteado
+            inimigo.tipo = dados_inimigo["tipo"]
+            inimigo.nivel = nivel_inimigo
+            inimigo.hp_max = dados_inimigo["hp_base"] + (nivel_inimigo * 10)
+            inimigo.hp_atual = inimigo.hp_max
+            inimigo.ataque = 10 + (nivel_inimigo * 2)
+            inimigo.defesa = 5 + nivel_inimigo
+            inimigo.caminho_imagem = dados_inimigo["caminho_imagem"]
+            
+            inimigo.equipar_skills_bot() # Atualiza as 5 skills do inimigo
+            
+            meu_galo.hp_atual = meu_galo.hp_max 
+            
+            texto_log.value = f"Um {inimigo.nome} Lvl {inimigo.nivel} apareceu!"
             atualizar_tela()
             
             vel = float(seletor_vel.value)
@@ -94,23 +103,24 @@ def criar_tela_rinha(jogador, page):
             while meu_galo.hp_atual > 0 and inimigo.hp_atual > 0:
                 if arena.page is None: 
                     return 
-
-                vel = float(seletor_vel.value) 
-
-                if turno_jogador:
-                    dano = inimigo.sofrer_dano(meu_galo.ataque)
-                    texto_log.value = f"➡️ {jogador.nome} usou Bico causando {dano} de dano"
-                else:
-                    dano = meu_galo.sofrer_dano(inimigo.ataque)
-                    texto_log.value = f"{texto_log.value}\n⬅️ {inimigo.nome} usou Arranhão causando {dano} de dano"
+                vel = float(seletor_vel.value)
                 
+                if turno_jogador:
+                    nome_skill, dano_ataque = meu_galo.atacar() # Implementação do atacar()
+                    dano_real = inimigo.sofrer_dano(dano_ataque)
+                    texto_log.value = f"  {jogador.nome} usou {nome_skill} causando {dano_real} de dano"
+                else:
+                    nome_skill, dano_ataque = inimigo.atacar() # Implementação do atacar()
+                    dano_real = meu_galo.sofrer_dano(dano_ataque)
+                    texto_log.value = f"{texto_log.value}\n  {inimigo.nome} usou {nome_skill} causando {dano_real} de dano"
+                            
                 atualizar_tela()
                 
                 if turno_jogador:
                     await asyncio.sleep(vel / 2)
                 else:
                     await asyncio.sleep(vel)
-                    
+                
                 turno_jogador = not turno_jogador
 
             if arena.page is not None:
@@ -119,13 +129,13 @@ def criar_tela_rinha(jogador, page):
                     meu_galo.ganhar_xp(xp_ganho)
                     jogador.moedas += moedas_ganhas
                     jogador.salvar()
-                    texto_log.value = f"{texto_log.value}\n\n🏆 {jogador.nome} venceu!\n💰 +{moedas_ganhas} Moedas | ✨ +{xp_ganho} XP\nProcurando próximo..."
+                    texto_log.value = f"{texto_log.value}\n\n  {jogador.nome} venceu!\n  +{moedas_ganhas} Moedas |   +{xp_ganho} XP\nProcurando próximo..."
                     atualizar_tela()
-                    await asyncio.sleep(float(seletor_vel.value) * 2) # Pausa antes de iniciar a próxima luta
+                    await asyncio.sleep(float(seletor_vel.value) * 2) 
                 else:
-                    texto_log.value = f"{texto_log.value}\n\n💀 O teu galo foi derrotado... Treino encerrado."
+                    texto_log.value = f"{texto_log.value}\n\n  O teu galo foi derrotado... Treino encerrado."
                     atualizar_tela()
-                    break # Sai do loop infinito se perderes
+                    break 
 
     page.run_task(loop_batalha)
 

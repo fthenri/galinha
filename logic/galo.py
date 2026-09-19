@@ -1,8 +1,10 @@
+import random # Nova importação
+from data.galos_db import GALOS_DB # Nova importação
+
 class Galo:
-    # Adicionado o parâmetro 'tipo' com valor padrão
-    def __init__(self, nome, hp_max, ataque, defesa, caminho_imagem, nivel=1, xp=0, tipo="Normal"): 
+    def __init__(self, nome, hp_max, ataque, defesa, caminho_imagem, nivel=1, xp=0, tipo="Normal", skills_equipadas=None): # Parâmetro skills_equipadas adicionado
         self.nome = nome
-        self.tipo = tipo # Atributo tipo
+        self.tipo = tipo
         self.nivel = nivel
         self.xp = xp
         self.hp_max = hp_max
@@ -10,9 +12,37 @@ class Galo:
         self.ataque = ataque
         self.defesa = defesa
         self.caminho_imagem = caminho_imagem
+        self.skills_equipadas = skills_equipadas if skills_equipadas is not None else [] # Inicialização do array
+
+    def obter_skills_desbloqueadas(self): # Novo método para checar habilidades do DB
+        if self.nome not in GALOS_DB:
+            return []
+        skills_db = GALOS_DB[self.nome]["skills"]
+        desbloqueadas = []
+        for lvl, skill in skills_db.items():
+            if lvl <= self.nivel:
+                desbloqueadas.append((lvl, skill))
+        return desbloqueadas
+
+    def equipar_skills_bot(self): # Novo método para equipar as 5 mais fortes
+        desbloqueadas = self.obter_skills_desbloqueadas()
+        desbloqueadas.sort(key=lambda x: x[0], reverse=True)
+        self.skills_equipadas = [skill for lvl, skill in desbloqueadas[:5]]
+
+    def atacar(self): # Novo método para calcular dano e escolher skill
+        if not self.skills_equipadas:
+            self.equipar_skills_bot()
+            
+        if not self.skills_equipadas:
+            return "Ataque Básico", self.ataque
+
+        skill = random.choice(self.skills_equipadas)
+        dano_base = random.randint(skill["min"], skill["max"])
+        dano_total = dano_base + self.ataque
+        return skill["nome"], dano_total
 
     def sofrer_dano(self, dano_recebido):
-        dano_real = max(1, dano_recebido - self.defesa) 
+        dano_real = max(1, dano_recebido - self.defesa)
         self.hp_atual -= dano_real
         if self.hp_atual < 0:
             self.hp_atual = 0
@@ -20,8 +50,7 @@ class Galo:
 
     def ganhar_xp(self, quantidade):
         self.xp += quantidade
-        # Nova fórmula: 30 de base + 60 por nível
-        xp_necessario = 30 + (self.nivel - 1) * 60 
+        xp_necessario = 30 + (self.nivel - 1) * 60
         
         while self.xp >= xp_necessario:
             self.xp -= xp_necessario
@@ -30,19 +59,19 @@ class Galo:
             self.hp_atual = self.hp_max
             self.ataque += 2
             self.defesa += 1
-            # Recalcula para caso ganhe XP suficiente para subir mais de um nível de uma vez
-            xp_necessario = 30 + (self.nivel - 1) * 60 
+            xp_necessario = 30 + (self.nivel - 1) * 60
 
     def to_dict(self):
         return {
             "nome": self.nome,
-            "tipo": self.tipo, # Adicionado ao save
+            "tipo": self.tipo,
             "hp_max": self.hp_max,
             "ataque": self.ataque,
             "defesa": self.defesa,
             "caminho_imagem": self.caminho_imagem,
             "nivel": self.nivel,
-            "xp": self.xp
+            "xp": self.xp,
+            "skills_equipadas": self.skills_equipadas # Inclusão no dicionário de save
         }
 
     @classmethod
@@ -55,5 +84,6 @@ class Galo:
             data["caminho_imagem"], 
             data.get("nivel", 1), 
             data.get("xp", 0),
-            data.get("tipo", "Normal") # Carregado do save
+            data.get("tipo", "Normal"),
+            data.get("skills_equipadas", []) # Resgate do dicionário de save
         )
