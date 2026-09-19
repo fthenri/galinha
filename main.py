@@ -8,8 +8,8 @@ def main(page: ft.Page):
     page.title = "Rinha Offline"
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
 
-    meu_jogador = Jogador.carregar() # Tenta carregar o save
-    if not meu_jogador: # Cria perfil inicial se não houver save
+    meu_jogador = Jogador.carregar()
+    if not meu_jogador:
         meu_jogador = Jogador("Henrique")
         meu_galo = Galo("Pintinho Inicial", 100, 15, 5, "assets/galos/00_2.png")
         meu_jogador.adicionar_galo(meu_galo)
@@ -20,9 +20,10 @@ def main(page: ft.Page):
 
     def mudar_aba(e):
         if e.control.selected_index == 0:
-            conteudo_atual.content = criar_tela_perfil(meu_jogador) # Atualiza dados na troca de aba
+            conteudo_atual.content = criar_tela_perfil(meu_jogador)
         elif e.control.selected_index == 1:
-            conteudo_atual.content = criar_tela_rinha(meu_jogador) # Atualiza dados na troca de aba
+            # ATENÇÃO AQUI: Agora passamos a 'page' junto com o jogador
+            conteudo_atual.content = criar_tela_rinha(meu_jogador, page) 
         elif e.control.selected_index == 2:
             conteudo_atual.content = tela_loja
         page.update()
@@ -30,7 +31,7 @@ def main(page: ft.Page):
     page.navigation_bar = ft.NavigationBar(
         destinations=[
             ft.NavigationBarDestination(icon=ft.Icons.PERSON, label="Perfil"),
-            ft.NavigationBarDestination(icon=ft.Icons.SPORTS_MMA, label="Rinha"),
+            ft.NavigationBarDestination(icon=ft.Icons.SPORTS_MMA, label="Treino"), # Mudei para Treino
             ft.NavigationBarDestination(icon=ft.Icons.STORE, label="Loja"),
         ],
         on_change=mudar_aba
