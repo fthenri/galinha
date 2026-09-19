@@ -2,7 +2,7 @@ import flet as ft
 import asyncio
 import random
 from logic.galo import Galo
-from data.galos_db import GALOS_DB # Importação do banco de galos
+from data.galos_db import GALOS_DB
 
 def criar_tela_rinha(jogador, page):
     if not jogador.galo_ativo:
@@ -21,7 +21,8 @@ def criar_tela_rinha(jogador, page):
     texto_nome_inimigo = ft.Text(f"{inimigo.nome} Level {inimigo.nivel}", weight=ft.FontWeight.BOLD)
     texto_hp_inimigo = ft.Text(f"{inimigo.hp_atual}/{inimigo.hp_max}", size=12)
     barra_hp_inimigo = ft.ProgressBar(value=1.0, color=ft.Colors.PURPLE, width=150)
-    imagem_inimigo = ft.Image(src=inimigo.caminho_imagem, height=200, fit="contain")
+    
+    imagem_combate = ft.Image(src=meu_galo.caminho_imagem, height=200, fit="contain") # Inicialização com src obrigatório
     
     seletor_vel = ft.Dropdown(
         label="Velocidade do Treino",
@@ -51,10 +52,12 @@ def criar_tela_rinha(jogador, page):
                     texto_nome_inimigo,
                     texto_hp_inimigo,
                     barra_hp_inimigo
-                ])
+                ], horizontal_alignment=ft.CrossAxisAlignment.END)
             ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
             ft.Container(height=10),
-            imagem_inimigo
+            ft.Row([
+                imagem_combate
+            ], alignment=ft.MainAxisAlignment.CENTER)
         ])
     )
 
@@ -66,15 +69,14 @@ def criar_tela_rinha(jogador, page):
         texto_nome_inimigo.value = f"{inimigo.nome} Level {inimigo.nivel}"
         texto_hp_inimigo.value = f"{inimigo.hp_atual}/{inimigo.hp_max}"
         barra_hp_inimigo.value = inimigo.hp_atual / inimigo.hp_max
-        imagem_inimigo.src = inimigo.caminho_imagem
+        
         try:
             page.update()
         except Exception:
-            pass 
+            pass
 
     async def loop_batalha():
         while arena.page is not None:
-            # Sorteio do inimigo baseado no DB e nível do jogador
             nome_sorteado = random.choice(list(GALOS_DB.keys()))
             dados_inimigo = GALOS_DB[nome_sorteado]
             nivel_inimigo = max(1, meu_galo.nivel + random.randint(-1, 2))
@@ -88,9 +90,11 @@ def criar_tela_rinha(jogador, page):
             inimigo.defesa = 5 + nivel_inimigo
             inimigo.caminho_imagem = dados_inimigo["caminho_imagem"]
             
-            inimigo.equipar_skills_bot() # Atualiza as 5 skills do inimigo
-            
+            inimigo.equipar_skills_bot() 
             meu_galo.hp_atual = meu_galo.hp_max 
+            
+            imagem_combate.src = inimigo.caminho_imagem
+            imagem_combate.scale = ft.Scale(scale_x=-1, scale_y=1)
             
             texto_log.value = f"Um {inimigo.nome} Lvl {inimigo.nivel} apareceu!"
             atualizar_tela()
@@ -106,11 +110,17 @@ def criar_tela_rinha(jogador, page):
                 vel = float(seletor_vel.value)
                 
                 if turno_jogador:
-                    nome_skill, dano_ataque = meu_galo.atacar() # Implementação do atacar()
+                    imagem_combate.src = meu_galo.caminho_imagem
+                    imagem_combate.scale = ft.Scale(scale_x=1, scale_y=1)
+                    
+                    nome_skill, dano_ataque = meu_galo.atacar()
                     dano_real = inimigo.sofrer_dano(dano_ataque)
                     texto_log.value = f"  {jogador.nome} usou {nome_skill} causando {dano_real} de dano"
                 else:
-                    nome_skill, dano_ataque = inimigo.atacar() # Implementação do atacar()
+                    imagem_combate.src = inimigo.caminho_imagem
+                    imagem_combate.scale = ft.Scale(scale_x=-1, scale_y=1)
+                    
+                    nome_skill, dano_ataque = inimigo.atacar() 
                     dano_real = meu_galo.sofrer_dano(dano_ataque)
                     texto_log.value = f"{texto_log.value}\n  {inimigo.nome} usou {nome_skill} causando {dano_real} de dano"
                             
