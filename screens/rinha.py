@@ -3,6 +3,7 @@ import asyncio
 import random
 from logic.galo import Galo
 from data.galos_db import GALOS_DB
+from logic.efeitos import BUFFS # Importação da lista de buffs mantida[cite: 5]
 
 def criar_tela_rinha(jogador, page):
     if not jogador.galo_ativo:
@@ -213,12 +214,19 @@ def criar_tela_rinha(jogador, page):
                         msg_ataque += " (Bloqueado)"
                         
                     if efeito:
-                        if efeito == "Shield":
-                            atacante.aplicar_efeito(efeito)
-                            msg_ataque += f" e ativou {efeito}!"
-                        else:
-                            defensor.aplicar_efeito(efeito)
-                            msg_ataque += f" e aplicou {efeito}!"
+                        # Remoção da lista local 'buffs' e uso direto da importação dinâmica global BUFFS
+                        alvo = atacante if efeito["nome"] in BUFFS else defensor 
+                        
+                        aplicou = alvo.aplicar_efeito(efeito)
+                        
+                        if aplicou:
+                            acao = "ativou" if alvo == atacante else "aplicou"
+                            msg_ataque += f" e {acao} {efeito['nome']}!"
+                            
+                        # Tratamento imediato de mecânicas de cura baseadas no dano causado
+                        if aplicou and efeito["nome"] in ["Life Steal", "Trade Blood For Food"]:
+                            atacante.hp_atual = min(atacante.hp_max, atacante.hp_atual + dano_real)
+                            msg_ataque += f" roubando {dano_real} HP!"
                             
                     adicionar_log(msg_ataque)
 

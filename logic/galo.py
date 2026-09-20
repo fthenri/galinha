@@ -1,5 +1,6 @@
 import random
 from data.galos_db import GALOS_DB
+from logic.efeitos import EFEITOS_INICIO_TURNO, EFEITOS_DANO_RECEBIDO # Importação do motor de efeitos
 
 class Galo:
     def __init__(self, nome, hp_max, caminho_imagem, nivel=1, xp=0, tipo="Normal", skills_equipadas=None, efeitos=None): 
@@ -37,19 +38,26 @@ class Galo:
 
         skill = random.choice(self.skills_equipadas)
         dano_total = random.randint(skill["min"], skill["max"])
-        efeito = skill.get("efeito", None)
-        return skill["nome"], dano_total, efeito
+        
+        dados_efeito = None
+        if "efeito" in skill:
+            dados_efeito = {
+                "nome": skill["efeito"],
+                "chance": skill.get("chance", 100),
+                "turnos": skill.get("turnos", 1)
+            }
+            
+        return skill["nome"], dano_total, dados_efeito
 
-    def aplicar_efeito(self, nome_efeito):
-        duracoes = {
-            "Bleeding": 3,
-            "Hemorrhage": 3,
-            "Origami": 1,
-            "Stun": 1,
-            "Shield": 2
-        }
-        if nome_efeito in duracoes:
-            self.efeitos[nome_efeito] = duracoes[nome_efeito]
+    def aplicar_efeito(self, dados_efeito):
+        if not dados_efeito:
+            return False
+            
+        if random.randint(1, 100) <= dados_efeito["chance"]:
+            self.efeitos[dados_efeito["nome"]] = dados_efeito["turnos"]
+            return True
+            
+        return False
 
     def processar_efeitos_inicio_turno(self):
         mensagens = []
@@ -58,17 +66,10 @@ class Galo:
 
         for efeito, turnos in self.efeitos.items():
             if turnos > 0:
-                if efeito == "Bleeding":
-                    dano = int(self.hp_max * 0.05) # 5% do HP Máximo
-                    self.hp_atual -= dano
-                    mensagens.append(f"{self.nome} perdeu {dano} HP por Bleeding.")
-                elif efeito == "Hemorrhage":
-                    dano = int(self.hp_max * 0.10) # 10% do HP Máximo
-                    self.hp_atual -= dano
-                    mensagens.append(f"{self.nome} perdeu {dano} HP por Hemorrhage.")
-                elif efeito in ["Origami", "Stun"]:
-                    pode_atacar = False
-                    mensagens.append(f"{self.nome} está imobilizado ({efeito}) e perdeu o turno!")
+                if efeito in EFEITOS_INICIO_TURNO: # Delega o processamento da mecânica para o motor
+                    msg, permite_atacar = EFEITOS_INICIO_TURNO[efeito](self, efeito)
+                    if msg: mensagens.append(msg)
+                    if not permite_atacar: pode_atacar = False
 
                 self.efeitos[efeito] -= 1
                 if self.efeitos[efeito] <= 0:
@@ -84,12 +85,17 @@ class Galo:
 
     def sofrer_dano(self, dano_recebido):
         dano_real = max(1, dano_recebido)
+        efeitos_para_remover = []
         
-        if self.efeitos.get("Shield", 0) > 0:
-            dano_real = int(dano_real * 0.5) # Shield reduz dano pela metade
-            self.efeitos["Shield"] -= 1
-            if self.efeitos["Shield"] <= 0:
-                del self.efeitos["Shield"]
+        for efeito in list(self.efeitos.keys()): # Itera iterando cópia das chaves para processar mitigações reativas
+            if efeito in EFEITOS_DANO_RECEBIDO and self.efeitos[efeito] > 0:
+                dano_real = EFEITOS_DANO_RECEBIDO[efeito](dano_real)
+                self.efeitos[efeito] -= 1
+                if self.efeitos[efeito] <= 0:
+                    efeitos_para_remover.append(efeito)
+                    
+        for efeito in efeitos_para_remover:
+            del self.efeitos[efeito]
 
         self.hp_atual -= dano_real
         if self.hp_atual < 0:

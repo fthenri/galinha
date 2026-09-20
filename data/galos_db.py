@@ -2,7 +2,7 @@ GALOS_DB = {
 "Rooster Normal": {
         "tipo": "Basic",
         "raridade": "Common",
-        "hp_base": 112, 
+        "hp_base": 100, 
         "caminho_imagem": "assets/galos/00_2.png",
         "skills": {
             1: {"nome": "Peck", "min": 14, "max": 23},
@@ -26,9 +26,9 @@ GALOS_DB = {
         }
     },
     "Rooster Paper": {
-        "tipo": "Craft", 
+        "tipo": "Craft",
         "raridade": "Common",
-        "hp_base": 112, 
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/01_2.png",
         "skills": {
             1: {"nome": "Paper rain", "min": 10, "max": 27},
@@ -54,7 +54,7 @@ GALOS_DB = {
     "Rooster Rock": {
         "tipo": "Basic",
         "raridade": "Common",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/02_2.png", # Ajuste o número se necessário
         "skills": {
             1: {"nome": "Stone rain", "min": 17, "max": 22},
@@ -80,7 +80,7 @@ GALOS_DB = {
     "Rooster Cutting": {
         "tipo": "Basic",
         "raridade": "Common",
-        "hp_base": 112, 
+        "hp_base": 100, 
         "caminho_imagem": "assets/galos/03_2.png", # Ajuste o número da imagem conforme o seu repositório
         "skills": {
             1: {"nome": "Scissor cut", "min": 17, "max": 22},
@@ -106,7 +106,7 @@ GALOS_DB = {
     "Rooster Fire": {
         "tipo": "Ruin",
         "raridade": "Common",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/04_2.png", # Ajuste o número da imagem conforme o seu repositório
         "skills": {
             1: {"nome": "Flame fist", "min": 13, "max": 24},
@@ -132,7 +132,7 @@ GALOS_DB = {
     "Rooster Ice": {
         "tipo": "Aquatic",
         "raridade": "Common",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/05_2.png", # Ajusta o nome do ficheiro conforme o teu repositório
         "skills": {
             1: {"nome": "Ice rain", "min": 17, "max": 22},
@@ -158,7 +158,7 @@ GALOS_DB = {
     "Rooster Metal": {
         "tipo": "Basic",
         "raridade": "Common",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/010_2.png", # Ajusta o número da imagem conforme o teu repositório
         "skills": {
             1: {"nome": "Metal hand", "min": 10, "max": 29},
@@ -184,7 +184,7 @@ GALOS_DB = {
     "Rooster Acid": {
         "tipo": "Ruin",
         "raridade": "Common",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/015_2.png", # Ajusta o número da imagem conforme o teu repositório
         "skills": {
             1: {"nome": "Acid", "min": 12, "max": 20, "efeito": "Acid", "chance": 30, "turnos": 2},
@@ -210,7 +210,7 @@ GALOS_DB = {
     "Rooster Wood": {
         "tipo": "Wild",
         "raridade": "Common",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/019_2.png", # Ajusta o número da imagem conforme o teu repositório
         "skills": {
             1: {"nome": "Wood strike", "min": 17, "max": 22},
@@ -236,7 +236,7 @@ GALOS_DB = {
     "Rooster Rubber": {
         "tipo": "Craft",
         "raridade": "Common",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/025_2.png", # Ajusta o número da imagem conforme o teu repositório
         "skills": {
             1: {"nome": "Rubber punch", "min": 18, "max": 22},
@@ -262,7 +262,7 @@ GALOS_DB = {
     "Rooster Emo": {
         "tipo": "Illusion",
         "raridade": "Common",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/034_2.png", # Ajusta o número da imagem conforme o teu repositório
         "skills": {
             1: {"nome": "Depressing peck", "min": 15, "max": 22},
@@ -288,7 +288,7 @@ GALOS_DB = {
     "Rooster Dinosaur": {
         "tipo": "Wild",
         "raridade": "Common",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/036_2.png", # Ajusta o número da imagem conforme o teu diretório
         "skills": {
             1: {"nome": "Bite", "min": 15, "max": 21},
@@ -314,7 +314,7 @@ GALOS_DB = {
     "Rooster Skeleton": {
         "tipo": "Ruin",
         "raridade": "Common",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/041_2.png", # Ajusta o número da imagem conforme o teu diretório
         "skills": {
             1: {"nome": "Skeleton punch", "min": 16, "max": 21},
@@ -340,7 +340,7 @@ GALOS_DB = {
     "Rooster Plush": {
         "tipo": "Craft",
         "raridade": "Common",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/046_2.png", # Ajusta o número da imagem conforme o teu diretório
         "skills": {
             1: {"nome": "Innocent peck", "min": 15, "max": 18},
@@ -366,7 +366,7 @@ GALOS_DB = {
     "Rooster Porcelain": {
         "tipo": "Craft",
         "raridade": "Common",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/047_2.png", # Ajuste o número da imagem
         "skills": {
             1: {"nome": "Rigid peck", "min": 19, "max": 22},
@@ -392,7 +392,7 @@ GALOS_DB = {
     "Rooster Hologram": {
         "tipo": "Illusion",
         "raridade": "Common",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/055.png", # Ajuste o número da imagem
         "skills": {
             1: {"nome": "Luminous pulse", "min": 16, "max": 20},
@@ -418,7 +418,7 @@ GALOS_DB = {
     "Rooster Invisible": {
         "tipo": "Illusion",
         "raridade": "Common",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/059.png", # Ajuste o número da imagem
         "skills": {
             1: {"nome": "Phantom breeze", "min": 9, "max": 28},
@@ -444,7 +444,7 @@ GALOS_DB = {
     "Rooster Magma": {
         "tipo": "Ruin",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/06_2.png", # Ajuste o número da imagem
         "skills": {
             1: {"nome": "Magma fist", "min": 19, "max": 27},
@@ -470,7 +470,7 @@ GALOS_DB = {
     "Rooster Water": {
         "tipo": "Aquatic",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/07_2.png", # Ajuste o número da imagem
         "skills": {
             1: {"nome": "Water jet", "min": 19, "max": 27},
@@ -496,7 +496,7 @@ GALOS_DB = {
     "Rooster Nature": {
         "tipo": "Nature",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/08_2.png",
         "skills": {
             1: {"nome": "Root", "min": 12, "max": 22, "efeito": "Bleeding", "chance": 50, "turnos": 2},
@@ -522,7 +522,7 @@ GALOS_DB = {
     "Rooster Plasma": {
         "tipo": "Radiant",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/011_2.png",
         "skills": {
             1: {"nome": "Plasma hand", "min": 1, "max": 12, "efeito": "Plasma", "chance": 100, "turnos": 2},
@@ -548,7 +548,7 @@ GALOS_DB = {
     "Rooster Robotic": {
         "tipo": "Radiant",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/013_2.png",
         "skills": {
             1: {"nome": "Laser", "min": 12, "max": 18, "efeito": "Flames", "chance": 50, "turnos": 2},
@@ -574,7 +574,7 @@ GALOS_DB = {
     "Rooster Electric": {
         "tipo": "Radiant",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/016_2.png",
         "skills": {
             1: {"nome": "Lightning", "min": 12, "max": 16, "efeito": "Flames", "chance": 50, "turnos": 2},
@@ -600,7 +600,7 @@ GALOS_DB = {
     "Rooster Explosion": {
         "tipo": "Basic",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/020_2.png",
         "skills": {
             1: {"nome": "Micro explosion", "min": 15, "max": 30},
@@ -626,7 +626,7 @@ GALOS_DB = {
     "Rooster Sand": {
         "tipo": "Wild",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/024_2.png",
         "skills": {
             1: {"nome": "Grains of sand", "min": 20, "max": 26},
@@ -652,7 +652,7 @@ GALOS_DB = {
     "Rooster Radioactive": {
         "tipo": "Ruin",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/027_2.png",
         "skills": {
             1: {"nome": "Contaminated spear", "min": 18, "max": 27},
@@ -678,7 +678,7 @@ GALOS_DB = {
     "Rooster Samurai": {
         "tipo": "Warrior",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/033_2.png", # Ajuste o número da imagem
         "skills": {
             1: {"nome": "Sword", "min": 21, "max": 25},
@@ -704,7 +704,7 @@ GALOS_DB = {
     "Rooster Air": {
         "tipo": "Mystic",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/037_2.png", # Alterar se necessário
         "skills": {
             1: {"nome": "Gentle wind", "min": 21, "max": 25},
@@ -730,7 +730,7 @@ GALOS_DB = {
     "Rooster Military": {
         "tipo": "Warrior",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/043_2.png", # Ajuste o número da imagem
         "skills": {
             1: {"nome": "Recruit", "min": 22, "max": 24},
@@ -756,7 +756,7 @@ GALOS_DB = {
     "Rooster Mummy": {
         "tipo": "Ruin",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/048_2.png",
         "skills": {
             1: {"nome": "Bandaged kick", "min": 21, "max": 25},
@@ -782,7 +782,7 @@ GALOS_DB = {
     "Rooster Painter": {
         "tipo": "Illusion",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/056.png",
         "skills": {
             1: {"nome": "Ink drops", "min": 21, "max": 25},
@@ -808,7 +808,7 @@ GALOS_DB = {
     "Rooster Egirl": {
         "tipo": "Illusion",
         "raridade": "Rare",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/060.png",
         "skills": {
             1: {"nome": "Kawaii blade", "min": 20, "max": 26},
@@ -834,7 +834,7 @@ GALOS_DB = {
     "Rooster Light": {
         "tipo": "Radiant",
         "raridade": "Epic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/09_2.png",
         "skills": {
             1: {"nome": "Light beam", "min": 19, "max": 24},
@@ -860,7 +860,7 @@ GALOS_DB = {
     "Rooster Darkness": {
         "tipo": "Shadow",
         "raridade": "Epic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/012_2.png",
         "skills": {
             1: {"nome": "Dark beam", "min": 18, "max": 25},
@@ -886,7 +886,7 @@ GALOS_DB = {
     "Rooster Arcane": {
         "tipo": "Mystic",
         "raridade": "Epic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/014_2.png",
         "skills": {
             1: {"nome": "Arcane beam", "min": 20, "max": 21},
@@ -912,7 +912,7 @@ GALOS_DB = {
     "Rooster Gravity": {
         "tipo": "Mystic",
         "raridade": "Epic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/017_2.png",
         "skills": {
             1: {"nome": "Impulse", "min": 10, "max": 33},
@@ -938,7 +938,7 @@ GALOS_DB = {
     "Rooster Sun": {
         "tipo": "Radiant",
         "raridade": "Epic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/021_2.png",
         "skills": {
             1: {"nome": "Solar beam", "min": 1, "max": 7, "efeito": "Flames", "chance": 100, "turnos": 2},
@@ -964,7 +964,7 @@ GALOS_DB = {
     "Rooster Vampiric": {
         "tipo": "Shadow",
         "raridade": "Epic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/023_2.png",
         "skills": {
             1: {"nome": "Bite", "min": 10, "max": 15, "efeito": "Bleeding", "chance": 50, "turnos": 2},
@@ -990,7 +990,7 @@ GALOS_DB = {
     "Rooster Moon": {
         "tipo": "Radiant",
         "raridade": "Epic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/026_2.png",
         "skills": {
             1: {"nome": "Moonbeam", "min": 16, "max": 27},
@@ -1016,7 +1016,7 @@ GALOS_DB = {
     "Rooster Dragon": {
         "tipo": "Warrior",
         "raridade": "Epic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/028_2.png",
         "skills": {
             1: {"nome": "Claw", "min": 2, "max": 4, "efeito": "Bleeding", "chance": 100, "turnos": 2},
@@ -1042,7 +1042,7 @@ GALOS_DB = {
     "Rooster Ninja": {
         "tipo": "Warrior",
         "raridade": "Epic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/029_2.png",
         "skills": {
             1: {"nome": "Small knife", "min": 1, "max": 5, "efeito": "Bleeding", "chance": 100, "turnos": 2},
@@ -1068,7 +1068,7 @@ GALOS_DB = {
     "Rooster Ghost": {
         "tipo": "Shadow",
         "raridade": "Epic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/038_2.png",
         "skills": {
             1: {"nome": "Ghost punch", "min": 17, "max": 26},
@@ -1094,7 +1094,7 @@ GALOS_DB = {
     "Rooster Slime": {
         "tipo": "Aquatic",
         "raridade": "Epic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/042_2.png",
         "skills": {
             1: {"nome": "Slime strike", "min": 17, "max": 26},
@@ -1120,7 +1120,7 @@ GALOS_DB = {
     "Rooster Crystal": {
         "tipo": "Aquatic",
         "raridade": "Epic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/057.png",
         "skills": {
             1: {"nome": "Claws", "min": 18, "max": 22},
@@ -1146,7 +1146,7 @@ GALOS_DB = {
     "Rooster Giant": {
         "tipo": "Warrior",
         "raridade": "Epic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/061.png",
         "skills": {
             1: {"nome": "Giant punch", "min": 19, "max": 24},
@@ -1172,7 +1172,7 @@ GALOS_DB = {
     "Rooster Angelic": {
         "tipo": "Radiant",
         "raridade": "Legendary",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/018_2.png",
         "skills": {
             1: {"nome": "Celestial sphere", "min": 20, "max": 30},
@@ -1198,7 +1198,7 @@ GALOS_DB = {
     "Rooster Demonic": {
         "tipo": "Shadow",
         "raridade": "Legendary",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/022_2.png",
         "skills": {
             1: {"nome": "Demonic claw", "min": 18, "max": 32},
@@ -1224,7 +1224,7 @@ GALOS_DB = {
     "Rooster Eclipse": {
         "tipo": "Shadow",
         "raridade": "Legendary",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/030_2.png",
         "skills": {
             1: {"nome": "Moonbeam", "min": 18, "max": 30},
@@ -1250,7 +1250,7 @@ GALOS_DB = {
     "Rooster Zombie": {
         "tipo": "Ruin",
         "raridade": "Legendary",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/035_2.png",
         "skills": {
             1: {"nome": "Dead man's punch", "min": 21, "max": 29},
@@ -1276,7 +1276,7 @@ GALOS_DB = {
     "Rooster Wizard": {
         "tipo": "Mystic",
         "raridade": "Legendary",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/039_2.png",
         "skills": {
             1: {"nome": "Magic stone", "min": 22, "max": 28},
@@ -1302,7 +1302,7 @@ GALOS_DB = {
     "Rooster Drawing": {
         "tipo": "Illusion",
         "raridade": "Legendary",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/040_2.png",
         "skills": {
             1: {"nome": "Toon bite", "min": 25, "max": 28},
@@ -1328,7 +1328,7 @@ GALOS_DB = {
     "Rooster Apocalypse": {
         "tipo": "Mystic",
         "raridade": "Legendary",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/044_2.png",
         "skills": {
             1: {"nome": "Beginning of the End", "min": 25, "max": 30},
@@ -1354,7 +1354,7 @@ GALOS_DB = {
     "Rooster Panda": {
         "tipo": "Wild",
         "raridade": "Legendary",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/053.png",
         "skills": {
             1: {"nome": "Panda Claw", "min": 18, "max": 28},
@@ -1380,7 +1380,7 @@ GALOS_DB = {
     "Rooster Tire": {
         "tipo": "Craft",
         "raridade": "Legendary",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/058.png",
         "skills": {
             1: {"nome": "Running over", "min": 24, "max": 31},
@@ -1396,7 +1396,7 @@ GALOS_DB = {
             16: {"nome": "Running over", "min": 79, "max": 95},
             18: {"nome": "Kicking", "min": 89, "max": 98},
             20: {"nome": "Running over", "min": 100, "max": 102},
-            22: {"nome": "Kicking", "min": 108, "max": 112},
+            22: {"nome": "Kicking", "min": 108, "max": 100},
             24: {"nome": "Running over", "min": 114, "max": 149},
             26: {"nome": "Kicking", "min": 133, "max": 165},
             30: {"nome": "Running over", "min": 165, "max": 209},
@@ -1406,7 +1406,7 @@ GALOS_DB = {
     "Rooster Musician": {
         "tipo": "Illusion",
         "raridade": "Legendary",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/062.png",
         "skills": {
             1: {"nome": "Initial Chord", "min": 18, "max": 30},
@@ -1432,7 +1432,7 @@ GALOS_DB = {
     "Rooster Lupus": {
         "tipo": "Wild",
         "raridade": "Special",
-        "hp_base": 150,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/065.png",
         "skills": {
             1: {"nome": "Howl of Stellar Ruin", "min": 45, "max": 55, "efeito": "Stellar Ruin Howl", "chance": 100, "turnos": 4},
@@ -1446,7 +1446,7 @@ GALOS_DB = {
     "Rooster Time": {
         "tipo": "Mystic",
         "raridade": "Mythic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/031_2.png",
         "habilidade_passiva": "Revives with a bonus of 50% of hp after being killed once in battles",
         "skills": {
@@ -1473,7 +1473,7 @@ GALOS_DB = {
     "Rooster Phoenix": {
         "tipo": "Ruin",
         "raridade": "Mythic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/032_2.png",
         "habilidade_passiva": "Effect damage caused is converted to 220% healing",
         "skills": {
@@ -1500,7 +1500,7 @@ GALOS_DB = {
     "Rooster Existential": {
         "tipo": "Mystic",
         "raridade": "Mythic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/045_2.png",
         "habilidade_passiva": "Has 5 more skills unlocked after level 30 compared to normal roosters",
         "skills": {
@@ -1532,7 +1532,7 @@ GALOS_DB = {
     "Rooster Black": {
         "tipo": "Shadow",
         "raridade": "Mythic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/049_2.png",
         "habilidade_passiva": "Copies all opponent's skills with a bonus of 70% damage and effects",
         "skills": {}
@@ -1540,7 +1540,7 @@ GALOS_DB = {
     "Rooster White": {
         "tipo": "Radiant",
         "raridade": "Mythic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/050_2.png",
         "habilidade_passiva": "Is immune to all types of effects",
         "skills": {
@@ -1567,7 +1567,7 @@ GALOS_DB = {
     "Rooster Grail": {
         "tipo": "Radiant",
         "raridade": "Mythic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/063.png",
         "habilidade_passiva": "Your third attack causes a critical damage of 400%",
         "skills": {
@@ -1594,7 +1594,7 @@ GALOS_DB = {
     "Rooster Shield": {
         "tipo": "Craft",
         "raridade": "Mythic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/067.png",
         "habilidade_passiva": "Reduces and absorbs 35% of damage dealt to it, and on the next attack will deal the absorbed damage to the opponent",
         "skills": {
@@ -1621,7 +1621,7 @@ GALOS_DB = {
     "Rooster Vortex": {
         "tipo": "Mystic",
         "raridade": "Mythic",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/074.png",
         "habilidade_passiva": "On each attack, applies Vortal Rift to the opponent: a 2-turn damage effect dealing 70% the attack's damage per turn. This effect cannot be stolen or nullified.",
         "skills": {
@@ -1648,7 +1648,7 @@ GALOS_DB = {
     "Rooster Nephilim": {
         "tipo": "Mystic",
         "raridade": "Divine",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/054.png",
         "habilidade_passiva": "Suffers 50% reduced damage per attack. Each turn its damage increases by 20%",
         "skills": {
@@ -1675,7 +1675,7 @@ GALOS_DB = {
     "Rooster Berserker": {
         "tipo": "Warrior",
         "raridade": "Divine",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/066.png",
         "habilidade_passiva": "Ignores any barrier defense or armor in its damage. For each 1% of health as damage received it gains 10% damage",
         "skills": {
@@ -1702,7 +1702,7 @@ GALOS_DB = {
     "Rooster Ctulhu": {
         "tipo": "Aquatic",
         "raridade": "Divine",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/062_9.png",
         "habilidade_passiva": "Steals 45% of opponent's healing for itself. Whenever the opponent heals or Ctullhu applies an effect, the opponent gains a Corruption stack (max 45). Each stack increases all damage the opponent takes by 15%.",
         "skills": {
@@ -1729,7 +1729,7 @@ GALOS_DB = {
     "Rooster Lingering Will": {
         "tipo": "Warrior",
         "raridade": "Divine",
-        "hp_base": 112,
+        "hp_base": 100,
         "caminho_imagem": "assets/galos/073.png",
         "habilidade_passiva": "Has a 50% chance to steal an incoming effect and redirect it to the attacker. Revives once with 1 HP and gains Last Stand, multiplying its next attack by 3x.",
         "skills": {
