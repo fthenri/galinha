@@ -1,6 +1,7 @@
 GALOS_DB = {
     "Rooster Normal": {
         "tipo": "Basic",
+        "raridade": "Common",
         "hp_base": 112, 
         "caminho_imagem": "assets/galos/00_2.png",
         "skills": {
@@ -26,6 +27,7 @@ GALOS_DB = {
     },
     "Rooster Paper": {
         "tipo": "Craft", 
+        "raridade": "Common",
         "hp_base": 112, 
         "caminho_imagem": "assets/galos/01_2.png", # Altere para o nome correto do arquivo se precisar
         "skills": {
@@ -51,6 +53,7 @@ GALOS_DB = {
     },
     "Rooster Rock": {
         "tipo": "Basic",
+        "raridade": "Common",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/02_2.png", # Ajuste o número se necessário
         "skills": {
@@ -76,6 +79,7 @@ GALOS_DB = {
     },
     "Rooster Cutting": {
         "tipo": "Basic",
+        "raridade": "Common",
         "hp_base": 112, 
         "caminho_imagem": "assets/galos/03_2.png", # Ajuste o número da imagem conforme o seu repositório
         "skills": {
@@ -101,6 +105,7 @@ GALOS_DB = {
     },
     "Rooster Fire": {
         "tipo": "Ruin",
+        "raridade": "Common",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/04_2.png", # Ajuste o número da imagem conforme o seu repositório
         "skills": {
@@ -126,6 +131,7 @@ GALOS_DB = {
     },
     "Rooster Ice": {
         "tipo": "Aquatic",
+        "raridade": "Common",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/05_2.png", # Ajusta o nome do ficheiro conforme o teu repositório
         "skills": {
@@ -151,6 +157,7 @@ GALOS_DB = {
     },
     "Rooster Metal": {
         "tipo": "Basic",
+        "raridade": "Common",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/010_2.png", # Ajusta o número da imagem conforme o teu repositório
         "skills": {
@@ -176,6 +183,7 @@ GALOS_DB = {
     },
     "Rooster Acid": {
         "tipo": "Ruin",
+        "raridade": "Common",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/015_2.png", # Ajusta o número da imagem conforme o teu repositório
         "skills": {
@@ -201,6 +209,7 @@ GALOS_DB = {
     },
     "Rooster Wood": {
         "tipo": "Wild",
+        "raridade": "Common",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/019_2.png", # Ajusta o número da imagem conforme o teu repositório
         "skills": {
@@ -226,6 +235,7 @@ GALOS_DB = {
     },
     "Rooster Rubber": {
         "tipo": "Craft",
+        "raridade": "Common",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/025_2.png", # Ajusta o número da imagem conforme o teu repositório
         "skills": {
@@ -251,6 +261,7 @@ GALOS_DB = {
     },
     "Rooster Emo": {
         "tipo": "Illusion",
+        "raridade": "Common",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/034_2.png", # Ajusta o número da imagem conforme o teu repositório
         "skills": {
@@ -276,6 +287,7 @@ GALOS_DB = {
     },
     "Rooster Dinosaur": {
         "tipo": "Wild",
+        "raridade": "Common",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/036_2.png", # Ajusta o número da imagem conforme o teu diretório
         "skills": {
@@ -301,6 +313,7 @@ GALOS_DB = {
     },
     "Rooster Skeleton": {
         "tipo": "Ruin",
+        "raridade": "Common",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/041_2.png", # Ajusta o número da imagem conforme o teu diretório
         "skills": {
@@ -326,6 +339,7 @@ GALOS_DB = {
     },
     "Rooster Plush": {
         "tipo": "Craft",
+        "raridade": "Common",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/046_2.png", # Ajusta o número da imagem conforme o teu diretório
         "skills": {
@@ -351,6 +365,7 @@ GALOS_DB = {
     },
     "Rooster Porcelain": {
         "tipo": "Craft",
+        "raridade": "Common",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/047_2.png", # Ajuste o número da imagem
         "skills": {
@@ -376,6 +391,7 @@ GALOS_DB = {
     },
     "Rooster Hologram": {
         "tipo": "Illusion",
+        "raridade": "Common",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/055.png", # Ajuste o número da imagem
         "skills": {
@@ -401,8 +417,9 @@ GALOS_DB = {
     },
     "Rooster Invisible": {
         "tipo": "Illusion",
+        "raridade": "Common",
         "hp_base": 112,
-        "caminho_imagem": "assets/galos/059_2.png", # Ajuste o número da imagem
+        "caminho_imagem": "assets/galos/059.png", # Ajuste o número da imagem
         "skills": {
             1: {"nome": "Phantom breeze", "min": 9, "max": 28},
             2: {"nome": "Illusory shadow", "min": 1, "max": 2, "efeito": "Bleeding", "chance": 100, "turnos": 2},
@@ -426,6 +443,7 @@ GALOS_DB = {
     },
     "Rooster Magma": {
         "tipo": "Ruin",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/06_2.png", # Ajuste o número da imagem
         "skills": {
@@ -451,6 +469,7 @@ GALOS_DB = {
     },
     "Rooster Water": {
         "tipo": "Aquatic",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/07_2.png", # Ajuste o número da imagem
         "skills": {
@@ -476,6 +495,7 @@ GALOS_DB = {
     },
     "Rooster Nature": {
         "tipo": "Nature",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/08_2.png",
         "skills": {
@@ -501,6 +521,7 @@ GALOS_DB = {
     },
     "Rooster Plasma": {
         "tipo": "Radiant",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/011_2.png",
         "skills": {
@@ -526,6 +547,7 @@ GALOS_DB = {
     },
     "Rooster Robotic": {
         "tipo": "Radiant",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/013_2.png",
         "skills": {
@@ -551,6 +573,7 @@ GALOS_DB = {
     },
     "Rooster Electric": {
         "tipo": "Radiant",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/016_2.png",
         "skills": {
@@ -576,6 +599,7 @@ GALOS_DB = {
     },
     "Rooster Explosion": {
         "tipo": "Basic",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/020_2.png",
         "skills": {
@@ -601,6 +625,7 @@ GALOS_DB = {
     },
     "Rooster Sand": {
         "tipo": "Wild",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/024_2.png",
         "skills": {
@@ -626,6 +651,7 @@ GALOS_DB = {
     },
     "Rooster Radioactive": {
         "tipo": "Ruin",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/027_2.png",
         "skills": {
@@ -651,6 +677,7 @@ GALOS_DB = {
     },
     "Rooster Samurai": {
         "tipo": "Warrior",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/033_2.png", # Ajuste o número da imagem
         "skills": {
@@ -676,6 +703,7 @@ GALOS_DB = {
     },
     "Rooster Air": {
         "tipo": "Mystic",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/037_2.png", # Alterar se necessário
         "skills": {
@@ -701,6 +729,7 @@ GALOS_DB = {
     },
     "Rooster Military": {
         "tipo": "Warrior",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/043_2.png", # Ajuste o número da imagem
         "skills": {
@@ -726,6 +755,7 @@ GALOS_DB = {
     },
     "Rooster Mummy": {
         "tipo": "Ruin",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/048_2.png",
         "skills": {
@@ -751,6 +781,7 @@ GALOS_DB = {
     },
     "Rooster Painter": {
         "tipo": "Illusion",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/056.png",
         "skills": {
@@ -776,6 +807,7 @@ GALOS_DB = {
     },
     "Rooster Egirl": {
         "tipo": "Illusion",
+        "raridade": "Rare",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/060.png",
         "skills": {
@@ -801,6 +833,7 @@ GALOS_DB = {
     },
     "Rooster Light": {
         "tipo": "Radiant",
+        "raridade": "Epic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/09_2.png",
         "skills": {
@@ -826,6 +859,7 @@ GALOS_DB = {
     },
     "Rooster Darkness": {
         "tipo": "Shadow",
+        "raridade": "Epic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/012_2.png",
         "skills": {
@@ -851,6 +885,7 @@ GALOS_DB = {
     },
     "Rooster Arcane": {
         "tipo": "Mystic",
+        "raridade": "Epic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/014_2.png",
         "skills": {
@@ -876,6 +911,7 @@ GALOS_DB = {
     },
     "Rooster Gravity": {
         "tipo": "Mystic",
+        "raridade": "Epic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/017_2.png",
         "skills": {
@@ -901,6 +937,7 @@ GALOS_DB = {
     },
     "Rooster Sun": {
         "tipo": "Radiant",
+        "raridade": "Epic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/021_2.png",
         "skills": {
@@ -926,6 +963,7 @@ GALOS_DB = {
     },
     "Rooster Vampiric": {
         "tipo": "Shadow",
+        "raridade": "Epic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/023_2.png",
         "skills": {
@@ -951,6 +989,7 @@ GALOS_DB = {
     },
     "Rooster Moon": {
         "tipo": "Radiant",
+        "raridade": "Epic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/026_2.png",
         "skills": {
@@ -976,6 +1015,7 @@ GALOS_DB = {
     },
     "Rooster Dragon": {
         "tipo": "Warrior",
+        "raridade": "Epic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/028_2.png",
         "skills": {
@@ -1001,6 +1041,7 @@ GALOS_DB = {
     },
     "Rooster Ninja": {
         "tipo": "Warrior",
+        "raridade": "Epic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/029_2.png",
         "skills": {
@@ -1026,6 +1067,7 @@ GALOS_DB = {
     },
     "Rooster Ghost": {
         "tipo": "Shadow",
+        "raridade": "Epic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/038_2.png",
         "skills": {
@@ -1051,6 +1093,7 @@ GALOS_DB = {
     },
     "Rooster Slime": {
         "tipo": "Aquatic",
+        "raridade": "Epic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/042_2.png",
         "skills": {
@@ -1076,6 +1119,7 @@ GALOS_DB = {
     },
     "Rooster Crystal": {
         "tipo": "Aquatic",
+        "raridade": "Epic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/057.png",
         "skills": {
@@ -1101,6 +1145,7 @@ GALOS_DB = {
     },
     "Rooster Giant": {
         "tipo": "Warrior",
+        "raridade": "Epic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/061.png",
         "skills": {
@@ -1126,6 +1171,7 @@ GALOS_DB = {
     },
     "Rooster Angelic": {
         "tipo": "Radiant",
+        "raridade": "Legendary",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/018_2.png",
         "skills": {
@@ -1151,6 +1197,7 @@ GALOS_DB = {
     },
     "Rooster Demonic": {
         "tipo": "Shadow",
+        "raridade": "Legendary",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/022_2.png",
         "skills": {
@@ -1176,6 +1223,7 @@ GALOS_DB = {
     },
     "Rooster Eclipse": {
         "tipo": "Shadow",
+        "raridade": "Legendary",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/030_2.png",
         "skills": {
@@ -1201,6 +1249,7 @@ GALOS_DB = {
     },
     "Rooster Zombie": {
         "tipo": "Ruin",
+        "raridade": "Legendary",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/035_2.png",
         "skills": {
@@ -1226,6 +1275,7 @@ GALOS_DB = {
     },
     "Rooster Wizard": {
         "tipo": "Mystic",
+        "raridade": "Legendary",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/039_2.png",
         "skills": {
@@ -1251,6 +1301,7 @@ GALOS_DB = {
     },
     "Rooster Drawing": {
         "tipo": "Illusion",
+        "raridade": "Legendary",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/040_2.png",
         "skills": {
@@ -1276,6 +1327,7 @@ GALOS_DB = {
     },
     "Rooster Apocalypse": {
         "tipo": "Mystic",
+        "raridade": "Legendary",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/044_2.png",
         "skills": {
@@ -1301,6 +1353,7 @@ GALOS_DB = {
     },
     "Rooster Panda": {
         "tipo": "Wild",
+        "raridade": "Legendary",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/053.png",
         "skills": {
@@ -1326,6 +1379,7 @@ GALOS_DB = {
     },
     "Rooster Tire": {
         "tipo": "Craft",
+        "raridade": "Legendary",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/058.png",
         "skills": {
@@ -1351,6 +1405,7 @@ GALOS_DB = {
     },
     "Rooster Musician": {
         "tipo": "Illusion",
+        "raridade": "Legendary",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/062.png",
         "skills": {
@@ -1376,6 +1431,7 @@ GALOS_DB = {
     },
     "Rooster Lupus": {
         "tipo": "Wild",
+        "raridade": "Special",
         "hp_base": 150,
         "caminho_imagem": "assets/galos/065.png",
         "skills": {
@@ -1389,6 +1445,7 @@ GALOS_DB = {
     },
     "Rooster Time": {
         "tipo": "Mystic",
+        "raridade": "Mythic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/031_2.png",
         "habilidade_passiva": "Revives with a bonus of 50% of hp after being killed once in battles",
@@ -1415,6 +1472,7 @@ GALOS_DB = {
     },
     "Rooster Phoenix": {
         "tipo": "Ruin",
+        "raridade": "Mythic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/032_2.png",
         "habilidade_passiva": "Effect damage caused is converted to 220% healing",
@@ -1441,6 +1499,7 @@ GALOS_DB = {
     },
     "Rooster Existential": {
         "tipo": "Mystic",
+        "raridade": "Mythic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/045_2.png",
         "habilidade_passiva": "Has 5 more skills unlocked after level 30 compared to normal roosters",
@@ -1472,6 +1531,7 @@ GALOS_DB = {
     },
     "Rooster Black": {
         "tipo": "Shadow",
+        "raridade": "Mythic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/049_2.png",
         "habilidade_passiva": "Copies all opponent's skills with a bonus of 70% damage and effects",
@@ -1479,6 +1539,7 @@ GALOS_DB = {
     },
     "Rooster White": {
         "tipo": "Radiant",
+        "raridade": "Mythic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/050_2.png",
         "habilidade_passiva": "Is immune to all types of effects",
@@ -1505,6 +1566,7 @@ GALOS_DB = {
     },
     "Rooster Grail": {
         "tipo": "Radiant",
+        "raridade": "Mythic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/063.png",
         "habilidade_passiva": "Your third attack causes a critical damage of 400%",
@@ -1531,6 +1593,7 @@ GALOS_DB = {
     },
     "Rooster Shield": {
         "tipo": "Craft",
+        "raridade": "Mythic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/067.png",
         "habilidade_passiva": "Reduces and absorbs 35% of damage dealt to it, and on the next attack will deal the absorbed damage to the opponent",
@@ -1557,6 +1620,7 @@ GALOS_DB = {
     },
     "Rooster Vortex": {
         "tipo": "Mystic",
+        "raridade": "Mythic",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/074.png",
         "habilidade_passiva": "On each attack, applies Vortal Rift to the opponent: a 2-turn damage effect dealing 70% the attack's damage per turn. This effect cannot be stolen or nullified.",
@@ -1583,6 +1647,7 @@ GALOS_DB = {
     },
     "Rooster Nephilim": {
         "tipo": "Mystic",
+        "raridade": "Divine",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/054.png",
         "habilidade_passiva": "Suffers 50% reduced damage per attack. Each turn its damage increases by 20%",
@@ -1609,6 +1674,7 @@ GALOS_DB = {
     },
     "Rooster Berserker": {
         "tipo": "Warrior",
+        "raridade": "Divine",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/066.png",
         "habilidade_passiva": "Ignores any barrier defense or armor in its damage. For each 1% of health as damage received it gains 10% damage",
@@ -1635,6 +1701,7 @@ GALOS_DB = {
     },
     "Rooster Ctulhu": {
         "tipo": "Aquatic",
+        "raridade": "Divine",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/062_9.png",
         "habilidade_passiva": "Steals 45% of opponent's healing for itself. Whenever the opponent heals or Ctullhu applies an effect, the opponent gains a Corruption stack (max 45). Each stack increases all damage the opponent takes by 15%.",
@@ -1661,6 +1728,7 @@ GALOS_DB = {
     },
     "Rooster Lingering Will": {
         "tipo": "Warrior",
+        "raridade": "Divine",
         "hp_base": 112,
         "caminho_imagem": "assets/galos/073.png",
         "habilidade_passiva": "Has a 50% chance to steal an incoming effect and redirect it to the attacker. Revives once with 1 HP and gains Last Stand, multiplying its next attack by 3x.",

@@ -9,8 +9,12 @@ def criar_tela_rinha(jogador, page):
         return ft.Text("Equipe um galo no perfil primeiro!")
         
     meu_galo = jogador.galo_ativo
-    inimigo = Galo("Dummy", 100, 10, 5, "assets/galos/00_2.png")
+    inimigo = Galo("Dummy", 100, "assets/galos/00_2.png")
     
+    if meu_galo.nome in GALOS_DB: 
+        # Fórmula corrigida para (nivel - 1) para não dar HP extra no lvl 1
+        meu_galo.hp_max = GALOS_DB[meu_galo.nome]["hp_base"] + ((meu_galo.nivel - 1) * 12)
+        
     meu_galo.hp_atual = meu_galo.hp_max 
     texto_log = ft.Text("Procurando oponente...", size=14)
     
@@ -22,17 +26,30 @@ def criar_tela_rinha(jogador, page):
     texto_hp_inimigo = ft.Text(f"{inimigo.hp_atual}/{inimigo.hp_max}", size=12)
     barra_hp_inimigo = ft.ProgressBar(value=1.0, color=ft.Colors.PURPLE, width=150)
     
-    imagem_combate = ft.Image(src=meu_galo.caminho_imagem, height=200, fit="contain") # Inicialização com src obrigatório
+    imagem_combate = ft.Image(src=meu_galo.caminho_imagem, height=200, fit="contain")
     
     seletor_vel = ft.Dropdown(
-        label="Velocidade do Treino",
+        label="Velocidade",
         options=[
             ft.dropdown.Option("1.0", "1x (Normal)"),
             ft.dropdown.Option("0.5", "2x (Rápido)"),
             ft.dropdown.Option("0.1", "10x (Flash)")
         ],
         value="1.0",
-        width=200
+        width=150
+    )
+    
+    seletor_dificuldade = ft.Dropdown(
+        label="Dificuldade",
+        options=[
+            ft.dropdown.Option("Facil", "Fácil"),
+            ft.dropdown.Option("Medio", "Médio"),
+            ft.dropdown.Option("Dificil", "Difícil"),
+            ft.dropdown.Option("Extremo", "Extremo"),
+            ft.dropdown.Option("Insano", "Insano")
+        ],
+        value="Facil",
+        width=150
     )
     
     arena = ft.Container(
@@ -76,18 +93,72 @@ def criar_tela_rinha(jogador, page):
             pass
 
     async def loop_batalha():
+        pesos_raridade = { 
+            "Common": 1, "Rare": 2, "Epic": 3, 
+            "Legendary": 4, "Mythic": 5, "Divine": 6
+        }
+        
         while arena.page is not None:
-            nome_sorteado = random.choice(list(GALOS_DB.keys()))
+            dificuldade = seletor_dificuldade.value
+            nivel_base = meu_galo.nivel
+            
+            raridade_jogador = GALOS_DB.get(meu_galo.nome, {}).get("raridade", "Common")
+            peso_jogador = pesos_raridade.get(raridade_jogador, 1)
+
+            galos_permitidos = []
+            for nome, dados in GALOS_DB.items():
+                peso_inim = pesos_raridade.get(dados.get("raridade", "Common"), 1)
+                if dificuldade == "Facil" and peso_inim <= 5: 
+                    galos_permitidos.append(nome)
+                elif dificuldade == "Medio" and peso_inim >= 2: 
+                    galos_permitidos.append(nome)
+                elif dificuldade == "Dificil" and peso_inim >= 3: 
+                    galos_permitidos.append(nome)
+                elif dificuldade == "Extremo" and peso_inim >= 4: 
+                    galos_permitidos.append(nome)
+                elif dificuldade == "Insano" and peso_inim >= 5: 
+                    galos_permitidos.append(nome)
+            
+            if not galos_permitidos: 
+                galos_permitidos = list(GALOS_DB.keys())
+                
+            nome_sorteado = random.choice(galos_permitidos) 
             dados_inimigo = GALOS_DB[nome_sorteado]
-            nivel_inimigo = max(1, meu_galo.nivel + random.randint(-1, 2))
+            peso_inimigo = pesos_raridade.get(dados_inimigo.get("raridade", "Common"), 1)
+            
+            if dificuldade == "Facil":
+                nivel_inimigo = max(1, nivel_base - 1)
+                if peso_inimigo > peso_jogador: 
+                    nivel_inimigo = max(1, nivel_inimigo - (peso_inimigo - peso_jogador))
+                mult_xp = 1.0
+                bonus_xp = 0
+            elif dificuldade == "Medio":
+                nivel_inimigo = nivel_base
+                mult_xp = 1.30
+                bonus_xp = 1
+            elif dificuldade == "Dificil":
+                nivel_inimigo = int(nivel_base * 1.40)
+                mult_xp = 1.60
+                bonus_xp = 2
+            elif dificuldade == "Extremo":
+                nivel_inimigo = nivel_base * 2
+                mult_xp = 1.80
+                bonus_xp = 5
+            elif dificuldade == "Insano":
+                nivel_inimigo = nivel_base * 3
+                mult_xp = 2.65
+                bonus_xp = 8
+            else:
+                nivel_inimigo = nivel_base
+                mult_xp = 1.0
+                bonus_xp = 0
             
             inimigo.nome = nome_sorteado
             inimigo.tipo = dados_inimigo["tipo"]
             inimigo.nivel = nivel_inimigo
-            inimigo.hp_max = dados_inimigo["hp_base"] + (nivel_inimigo * 10)
+            # Fórmula corrigida para inimigo também
+            inimigo.hp_max = dados_inimigo["hp_base"] + ((nivel_inimigo - 1) * 12) 
             inimigo.hp_atual = inimigo.hp_max
-            inimigo.ataque = 10 + (nivel_inimigo * 2)
-            inimigo.defesa = 5 + nivel_inimigo
             inimigo.caminho_imagem = dados_inimigo["caminho_imagem"]
             
             inimigo.equipar_skills_bot() 
@@ -135,7 +206,10 @@ def criar_tela_rinha(jogador, page):
 
             if arena.page is not None:
                 if meu_galo.hp_atual > 0:
-                    xp_ganho, moedas_ganhas = 34, 6
+                    xp_base = 34
+                    xp_ganho = int((xp_base * mult_xp) + bonus_xp)
+                    moedas_ganhas = 6
+                    
                     meu_galo.ganhar_xp(xp_ganho)
                     jogador.moedas += moedas_ganhas
                     jogador.salvar()
@@ -151,6 +225,6 @@ def criar_tela_rinha(jogador, page):
 
     return ft.Column([
         ft.Text("Treinamento", size=30, weight=ft.FontWeight.BOLD),
-        seletor_vel,
+        ft.Row([seletor_vel, seletor_dificuldade], alignment=ft.MainAxisAlignment.CENTER),
         arena
     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, scroll=ft.ScrollMode.AUTO)

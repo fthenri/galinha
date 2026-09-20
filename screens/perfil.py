@@ -10,7 +10,7 @@ def criar_tela_perfil(jogador):
                     ft.Image(src=galo.caminho_imagem, width=150, height=150),
                     ft.Text(f"{galo.nome} - Nível {galo.nivel}", weight=ft.FontWeight.BOLD, size=20),
                     ft.ProgressBar(value=galo.hp_atual/galo.hp_max, color=ft.Colors.RED, width=200),
-                    ft.Text(f"HP: {galo.hp_atual}/{galo.hp_max} | ATQ: {galo.ataque} | DEF: {galo.defesa}")
+                    ft.Text(f"HP: {galo.hp_atual}/{galo.hp_max}") 
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER)
             )
         )
