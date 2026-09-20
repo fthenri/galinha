@@ -1,5 +1,5 @@
 GALOS_DB = {
-    "Rooster Normal": {
+"Rooster Normal": {
         "tipo": "Basic",
         "raridade": "Common",
         "hp_base": 112, 
@@ -13,43 +13,43 @@ GALOS_DB = {
             7: {"nome": "Heavy charge", "min": 26, "max": 35},
             8: {"nome": "Flying kick", "min": 30, "max": 38},
             9: {"nome": "Glide", "min": 35, "max": 41},
-            11: {"nome": "Iron peck", "min": 35, "max": 44, "efeito": "Bleeding"},
+            11: {"nome": "Iron peck", "min": 35, "max": 44, "efeito": "Bleeding", "chance": 100, "turnos": 2},
             12: {"nome": "Stomp", "min": 38, "max": 47},
             14: {"nome": "Dominant kick", "min": 41, "max": 50},
-            15: {"nome": "Supreme peck", "min": 35, "max": 40, "efeito": "Origami"},
+            15: {"nome": "Supreme peck", "min": 35, "max": 40, "efeito": "Origami", "chance": 100, "turnos": 3},
             18: {"nome": "Lightning kicks", "min": 44, "max": 52},
             20: {"nome": "Lightning sweep", "min": 47, "max": 55},
-            22: {"nome": "Double peck", "min": 30, "max": 35, "efeito": "Hemorrhage"},
-            24: {"nome": "Divine kick", "min": 35, "max": 50, "efeito": "Shield"},
+            22: {"nome": "Double peck", "min": 30, "max": 35, "efeito": "Hemorrhage", "chance": 100, "turnos": 3},
+            24: {"nome": "Divine kick", "min": 35, "max": 50, "efeito": "Shield", "chance": 100, "turnos": 4},
             30: {"nome": "Peck of the gods", "min": 50, "max": 70},
-            31: {"nome": "Labere Volans", "min": 55, "max": 90} # Evolução
+            31: {"nome": "Labere Volans", "min": 55, "max": 90}
         }
     },
     "Rooster Paper": {
         "tipo": "Craft", 
         "raridade": "Common",
         "hp_base": 112, 
-        "caminho_imagem": "assets/galos/01_2.png", # Altere para o nome correto do arquivo se precisar
+        "caminho_imagem": "assets/galos/01_2.png",
         "skills": {
             1: {"nome": "Paper rain", "min": 10, "max": 27},
-            2: {"nome": "Paper clone", "min": 1, "max": 5, "efeito": "Origami"},
+            2: {"nome": "Paper clone", "min": 1, "max": 5, "efeito": "Origami", "chance": 100, "turnos": 3},
             3: {"nome": "Paper strike", "min": 15, "max": 20},
-            4: {"nome": "Paper sword", "min": 15, "max": 18, "efeito": "Bleeding"},
+            4: {"nome": "Paper sword", "min": 15, "max": 18, "efeito": "Bleeding", "chance": 100, "turnos": 2},
             5: {"nome": "Paper meteor", "min": 25, "max": 30},
             6: {"nome": "Explosive paper", "min": 27, "max": 30},
             7: {"nome": "Paper storm", "min": 28, "max": 31},
             8: {"nome": "Fury of papers", "min": 30, "max": 32},
             10: {"nome": "Black paper", "min": 33, "max": 40},
             12: {"nome": "Black paper rain", "min": 40, "max": 50},
-            13: {"nome": "Magic paper", "min": 35, "max": 40, "efeito": "Healing"},
+            13: {"nome": "Magic paper", "min": 35, "max": 40, "efeito": "Healing", "chance": 100, "turnos": 3},
             15: {"nome": "Paper star", "min": 50, "max": 60},
-            17: {"nome": "Magic paper rain", "min": 42, "max": 47, "efeito": "Healing"},
+            17: {"nome": "Magic paper rain", "min": 42, "max": 47, "efeito": "Healing", "chance": 100, "turnos": 3},
             18: {"nome": "Scarlet paper", "min": 50, "max": 57},
             22: {"nome": "Catastrophe", "min": 5, "max": 100},
             24: {"nome": "Paper big bang", "min": 55, "max": 63},
             30: {"nome": "Paper universe", "min": 65, "max": 90},
-            31: {"nome": "Aeterna Munus", "min": 65, "max": 95, "efeito": "Origami"} # Evolução
-        },
+            31: {"nome": "Aeterna Munus", "min": 65, "max": 95, "efeito": "Origami", "chance": 100, "turnos": 3}
+        }
     },
     "Rooster Rock": {
         "tipo": "Basic",

@@ -12,7 +12,6 @@ def criar_tela_rinha(jogador, page):
     inimigo = Galo("Dummy", 100, "assets/galos/00_2.png")
     
     if meu_galo.nome in GALOS_DB: 
-        # Fórmula corrigida para (nivel - 1) para não dar HP extra no lvl 1
         meu_galo.hp_max = GALOS_DB[meu_galo.nome]["hp_base"] + ((meu_galo.nivel - 1) * 12)
         
     meu_galo.hp_atual = meu_galo.hp_max 
@@ -156,7 +155,6 @@ def criar_tela_rinha(jogador, page):
             inimigo.nome = nome_sorteado
             inimigo.tipo = dados_inimigo["tipo"]
             inimigo.nivel = nivel_inimigo
-            # Fórmula corrigida para inimigo também
             inimigo.hp_max = dados_inimigo["hp_base"] + ((nivel_inimigo - 1) * 12) 
             inimigo.hp_atual = inimigo.hp_max
             inimigo.caminho_imagem = dados_inimigo["caminho_imagem"]
@@ -164,10 +162,17 @@ def criar_tela_rinha(jogador, page):
             inimigo.equipar_skills_bot() 
             meu_galo.hp_atual = meu_galo.hp_max 
             
-            imagem_combate.src = inimigo.caminho_imagem
-            imagem_combate.scale = ft.Scale(scale_x=-1, scale_y=1)
+            meu_galo.efeitos = {}
+            inimigo.efeitos = {}
             
-            texto_log.value = f"Um {inimigo.nome} Lvl {inimigo.nivel} apareceu!"
+            historico_log = []
+            def adicionar_log(msg):
+                historico_log.append(msg)
+                if len(historico_log) > 2:
+                    historico_log.pop(0)
+                texto_log.value = "\n".join(historico_log)
+            
+            adicionar_log(f"Um {inimigo.nome} Lvl {inimigo.nivel} apareceu!")
             atualizar_tela()
             
             vel = float(seletor_vel.value)
@@ -180,28 +185,45 @@ def criar_tela_rinha(jogador, page):
                     return 
                 vel = float(seletor_vel.value)
                 
-                if turno_jogador:
-                    imagem_combate.src = meu_galo.caminho_imagem
-                    imagem_combate.scale = ft.Scale(scale_x=1, scale_y=1)
-                    
-                    nome_skill, dano_ataque = meu_galo.atacar()
-                    dano_real = inimigo.sofrer_dano(dano_ataque)
-                    texto_log.value = f"  {jogador.nome} usou {nome_skill} causando {dano_real} de dano"
-                else:
-                    imagem_combate.src = inimigo.caminho_imagem
-                    imagem_combate.scale = ft.Scale(scale_x=-1, scale_y=1)
-                    
-                    nome_skill, dano_ataque = inimigo.atacar() 
-                    dano_real = meu_galo.sofrer_dano(dano_ataque)
-                    texto_log.value = f"{texto_log.value}\n  {inimigo.nome} usou {nome_skill} causando {dano_real} de dano"
-                            
-                atualizar_tela()
+                atacante = meu_galo if turno_jogador else inimigo
+                defensor = inimigo if turno_jogador else meu_galo
+                nome_atacante = jogador.nome if turno_jogador else inimigo.nome
                 
-                if turno_jogador:
+                imagem_combate.src = atacante.caminho_imagem
+                imagem_combate.scale = ft.Scale(scale_x=1 if turno_jogador else -1, scale_y=1)
+
+                mensagens_efeito, pode_atacar = atacante.processar_efeitos_inicio_turno()
+                if mensagens_efeito:
+                    for msg in mensagens_efeito:
+                        adicionar_log(msg)
+                    atualizar_tela()
                     await asyncio.sleep(vel / 2)
-                else:
-                    await asyncio.sleep(vel)
-                
+
+                if atacante.hp_atual <= 0:
+                    break
+
+                if pode_atacar:
+                    nome_skill, dano_ataque, efeito = atacante.atacar()
+                    tinha_escudo = defensor.efeitos.get("Shield", 0) > 0
+                    
+                    dano_real = defensor.sofrer_dano(dano_ataque)
+
+                    msg_ataque = f"{nome_atacante} usou {nome_skill} causando {dano_real} de dano"
+                    if tinha_escudo:
+                        msg_ataque += " (Bloqueado)"
+                        
+                    if efeito:
+                        if efeito == "Shield":
+                            atacante.aplicar_efeito(efeito)
+                            msg_ataque += f" e ativou {efeito}!"
+                        else:
+                            defensor.aplicar_efeito(efeito)
+                            msg_ataque += f" e aplicou {efeito}!"
+                            
+                    adicionar_log(msg_ataque)
+
+                atualizar_tela()
+                await asyncio.sleep(vel)
                 turno_jogador = not turno_jogador
 
             if arena.page is not None:
@@ -213,11 +235,11 @@ def criar_tela_rinha(jogador, page):
                     meu_galo.ganhar_xp(xp_ganho)
                     jogador.moedas += moedas_ganhas
                     jogador.salvar()
-                    texto_log.value = f"{texto_log.value}\n\n  {jogador.nome} venceu!\n  +{moedas_ganhas} Moedas |   +{xp_ganho} XP\nProcurando próximo..."
+                    texto_log.value = f"{jogador.nome} venceu!\n+{moedas_ganhas} Moedas | +{xp_ganho} XP\nProcurando próximo..."
                     atualizar_tela()
                     await asyncio.sleep(float(seletor_vel.value) * 2) 
                 else:
-                    texto_log.value = f"{texto_log.value}\n\n  O teu galo foi derrotado... Treino encerrado."
+                    texto_log.value = f"O teu galo foi derrotado... Treino encerrado."
                     atualizar_tela()
                     break 
 
