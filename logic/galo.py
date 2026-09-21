@@ -28,15 +28,19 @@ class Galo:
         desbloqueadas = self.obter_skills_desbloqueadas()
         desbloqueadas.sort(key=lambda x: x[0], reverse=True)
         self.skills_equipadas = [skill for lvl, skill in desbloqueadas[:5]]
+        while len(self.skills_equipadas) < 5:
+            self.skills_equipadas.append(None)
 
     def atacar(self):
-        if not self.skills_equipadas:
+        skills_validas = [s for s in self.skills_equipadas if s is not None]
+        if not skills_validas:
             self.equipar_skills_bot()
+            skills_validas = [s for s in self.skills_equipadas if s is not None]
             
-        if not self.skills_equipadas:
+        if not skills_validas:
             return "Ataque Básico", 10, None
 
-        skill = random.choice(self.skills_equipadas)
+        skill = random.choice(skills_validas)
         dano_total = random.randint(skill["min"], skill["max"])
         
         dados_efeito = None
@@ -127,6 +131,10 @@ class Galo:
 
     @classmethod
     def from_dict(cls, data):
+        skills_equipadas = data.get("skills_equipadas", [])
+        while len(skills_equipadas) < 5:
+            skills_equipadas.append(None)
+            
         return cls(
             data["nome"], 
             data["hp_max"], 
@@ -134,6 +142,6 @@ class Galo:
             data.get("nivel", 1), 
             data.get("xp", 0),
             data.get("tipo", "Normal"),
-            data.get("skills_equipadas", []),
+            skills_equipadas,
             data.get("efeitos", {})
         )

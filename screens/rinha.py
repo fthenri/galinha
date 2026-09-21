@@ -51,6 +51,25 @@ def criar_tela_rinha(jogador, page):
         value=jogador.dif_rinha, 
         width=150
     )
+    
+    auto_revive = ft.Switch(
+        label="Auto-Revive", 
+        value=False,
+        label_position=ft.LabelPosition.LEFT
+    )
+
+    def on_click_reiniciar(e):
+        arena.reiniciar_solicitado = True
+        
+    btn_reiniciar = ft.TextButton(
+        "Treinar Novamente",
+        on_click=on_click_reiniciar,
+        visible=False,
+        style=ft.ButtonStyle(
+            bgcolor=ft.Colors.GREEN_700, 
+            color=ft.Colors.WHITE
+        )
+    )
 
     arena = ft.Container(
         bgcolor=ft.Colors.BLACK_87,
@@ -271,22 +290,48 @@ def criar_tela_rinha(jogador, page):
                     atualizar_tela()
                     await asyncio.sleep(float(seletor_vel.value) * 2) 
                 else:
+                    if auto_revive.value:
+                        texto_log.value = f"O teu galo foi derrotado...\nAuto-Revive ativado! Curando e procurando próximo..."
+                        atualizar_tela()
+                        await asyncio.sleep(float(seletor_vel.value) * 2)
+                        continue
+                        
                     texto_log.value = f"O teu galo foi derrotado... Treino encerrado."
+                    btn_reiniciar.visible = True
                     atualizar_tela()
                     
+                    reiniciar_agora = False
+                    
                     # --- NOVO: LOOP DE ESPERA (IDLE LOOP) ---
-                    # Mantém a thread viva sincronizando os seletores até o usuário sair da aba
+                    # Mantém a thread viva sincronizando os seletores até o usuário sair da aba ou clicar em reiniciar
                     while arena_ativa():
                         jogador.vel_rinha = seletor_vel.value
                         jogador.dif_rinha = seletor_dificuldade.value
+                        
+                        if getattr(arena, "reiniciar_solicitado", False):
+                            arena.reiniciar_solicitado = False
+                            reiniciar_agora = True
+                            break
+                            
                         await asyncio.sleep(0.5) 
                     # ----------------------------------------
-                    break
+                    
+                    btn_reiniciar.visible = False
+                    
+                    if reiniciar_agora:
+                        texto_log.value = "Reiniciando treinamento..."
+                        atualizar_tela()
+                        await asyncio.sleep(1)
+                        continue
+                    else:
+                        break
 
     page.run_task(loop_batalha)
 
     return ft.Column([
         ft.Text("Treinamento", size=30, weight=ft.FontWeight.BOLD),
-        ft.Row([seletor_vel, seletor_dificuldade], alignment=ft.MainAxisAlignment.CENTER),
-        arena
+        ft.Row([seletor_vel, seletor_dificuldade, auto_revive], alignment=ft.MainAxisAlignment.CENTER, wrap=True),
+        arena,
+        ft.Container(height=10),
+        btn_reiniciar
     ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, scroll=ft.ScrollMode.AUTO)
