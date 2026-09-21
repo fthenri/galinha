@@ -3,7 +3,7 @@ import asyncio
 import random
 from logic.galo import Galo
 from data.galos_db import GALOS_DB
-from logic.efeitos import BUFFS # Importação da lista de buffs mantida[cite: 5]
+from logic.efeitos import BUFFS 
 
 def criar_tela_rinha(jogador, page):
     if not jogador.galo_ativo:
@@ -12,10 +12,10 @@ def criar_tela_rinha(jogador, page):
     meu_galo = jogador.galo_ativo
     inimigo = Galo("Dummy", 100, "assets/galos/00_2.png")
     
-    if meu_galo.nome in GALOS_DB: 
+    if meu_galo.nome in GALOS_DB:
         meu_galo.hp_max = GALOS_DB[meu_galo.nome]["hp_base"] + ((meu_galo.nivel - 1) * 12)
-        
-    meu_galo.hp_atual = meu_galo.hp_max 
+        meu_galo.hp_atual = meu_galo.hp_max
+
     texto_log = ft.Text("Procurando oponente...", size=14)
     
     texto_nome_meu = ft.Text(f"{jogador.nome} Level {meu_galo.nivel}", weight=ft.FontWeight.BOLD)
@@ -27,7 +27,7 @@ def criar_tela_rinha(jogador, page):
     barra_hp_inimigo = ft.ProgressBar(value=1.0, color=ft.Colors.PURPLE, width=150)
     
     imagem_combate = ft.Image(src=meu_galo.caminho_imagem, height=200, fit="contain")
-    
+
     seletor_vel = ft.Dropdown(
         label="Velocidade",
         options=[
@@ -35,7 +35,7 @@ def criar_tela_rinha(jogador, page):
             ft.dropdown.Option("0.5", "2x (Rápido)"),
             ft.dropdown.Option("0.1", "10x (Flash)")
         ],
-        value="1.0",
+        value=jogador.vel_rinha, 
         width=150
     )
     
@@ -48,10 +48,10 @@ def criar_tela_rinha(jogador, page):
             ft.dropdown.Option("Extremo", "Extremo"),
             ft.dropdown.Option("Insano", "Insano")
         ],
-        value="Facil",
+        value=jogador.dif_rinha, 
         width=150
     )
-    
+
     arena = ft.Container(
         bgcolor=ft.Colors.BLACK_87,
         padding=15,
@@ -93,12 +93,21 @@ def criar_tela_rinha(jogador, page):
             pass
 
     async def loop_batalha():
-        pesos_raridade = { 
-            "Common": 1, "Rare": 2, "Epic": 3, 
-            "Legendary": 4, "Mythic": 5, "Divine": 6
+        def arena_ativa():
+            try:
+                return arena.page is not None
+            except RuntimeError:
+                return False
+
+        pesos_raridade = {
+             "Common": 1, "Rare": 2, "Epic": 3,
+             "Legendary": 4, "Mythic": 5, "Divine": 6
         }
         
-        while arena.page is not None:
+        while arena_ativa():
+            jogador.vel_rinha = seletor_vel.value
+            jogador.dif_rinha = seletor_dificuldade.value
+            
             dificuldade = seletor_dificuldade.value
             nivel_base = meu_galo.nivel
             
@@ -161,7 +170,7 @@ def criar_tela_rinha(jogador, page):
             inimigo.caminho_imagem = dados_inimigo["caminho_imagem"]
             
             inimigo.equipar_skills_bot() 
-            meu_galo.hp_atual = meu_galo.hp_max 
+            meu_galo.hp_atual = meu_galo.hp_max
             
             meu_galo.efeitos = {}
             inimigo.efeitos = {}
@@ -182,8 +191,11 @@ def criar_tela_rinha(jogador, page):
             turno_jogador = True
             
             while meu_galo.hp_atual > 0 and inimigo.hp_atual > 0:
-                if arena.page is None: 
+                if not arena_ativa(): 
                     return 
+                
+                jogador.vel_rinha = seletor_vel.value
+                jogador.dif_rinha = seletor_dificuldade.value
                 vel = float(seletor_vel.value)
                 
                 atacante = meu_galo if turno_jogador else inimigo
@@ -205,36 +217,47 @@ def criar_tela_rinha(jogador, page):
 
                 if pode_atacar:
                     nome_skill, dano_ataque, efeito = atacante.atacar()
-                    tinha_escudo = defensor.efeitos.get("Shield", 0) > 0
                     
-                    dano_real = defensor.sofrer_dano(dano_ataque)
+                    foi_refletido = defensor.efeitos.get("Reflection", 0) > 0
+                    if foi_refletido:
+                        defensor.efeitos["Reflection"] -= 1
+                        if defensor.efeitos["Reflection"] <= 0:
+                            del defensor.efeitos["Reflection"]
+                        
+                        alvo_dano = atacante
+                        tinha_escudo = alvo_dano.efeitos.get("Shield", 0) > 0
+                        dano_real = alvo_dano.sofrer_dano(dano_ataque)
+                        
+                        msg_ataque = f"{defensor.nome} refletiu o ataque! {nome_atacante} sofreu {dano_real} de dano"
+                    else:
+                        alvo_dano = defensor
+                        tinha_escudo = alvo_dano.efeitos.get("Shield", 0) > 0
+                        dano_real = alvo_dano.sofrer_dano(dano_ataque)
+                        
+                        msg_ataque = f"{nome_atacante} usou {nome_skill} causando {dano_real} de dano"
 
-                    msg_ataque = f"{nome_atacante} usou {nome_skill} causando {dano_real} de dano"
                     if tinha_escudo:
                         msg_ataque += " (Bloqueado)"
-                        
+                    
                     if efeito:
-                        # Remoção da lista local 'buffs' e uso direto da importação dinâmica global BUFFS
-                        alvo = atacante if efeito["nome"] in BUFFS else defensor 
-                        
-                        aplicou = alvo.aplicar_efeito(efeito)
+                        alvo_efeito = atacante if efeito["nome"] in BUFFS else alvo_dano 
+                        aplicou = alvo_efeito.aplicar_efeito(efeito)
                         
                         if aplicou:
-                            acao = "ativou" if alvo == atacante else "aplicou"
+                            acao = "ativou" if alvo_efeito == atacante else "aplicou"
                             msg_ataque += f" e {acao} {efeito['nome']}!"
                             
-                        # Tratamento imediato de mecânicas de cura baseadas no dano causado
                         if aplicou and efeito["nome"] in ["Life Steal", "Trade Blood For Food"]:
                             atacante.hp_atual = min(atacante.hp_max, atacante.hp_atual + dano_real)
                             msg_ataque += f" roubando {dano_real} HP!"
-                            
+                    
                     adicionar_log(msg_ataque)
 
                 atualizar_tela()
                 await asyncio.sleep(vel)
                 turno_jogador = not turno_jogador
 
-            if arena.page is not None:
+            if arena_ativa(): 
                 if meu_galo.hp_atual > 0:
                     xp_base = 34
                     xp_ganho = int((xp_base * mult_xp) + bonus_xp)
@@ -243,13 +266,22 @@ def criar_tela_rinha(jogador, page):
                     meu_galo.ganhar_xp(xp_ganho)
                     jogador.moedas += moedas_ganhas
                     jogador.salvar()
+
                     texto_log.value = f"{jogador.nome} venceu!\n+{moedas_ganhas} Moedas | +{xp_ganho} XP\nProcurando próximo..."
                     atualizar_tela()
                     await asyncio.sleep(float(seletor_vel.value) * 2) 
                 else:
                     texto_log.value = f"O teu galo foi derrotado... Treino encerrado."
                     atualizar_tela()
-                    break 
+                    
+                    # --- NOVO: LOOP DE ESPERA (IDLE LOOP) ---
+                    # Mantém a thread viva sincronizando os seletores até o usuário sair da aba
+                    while arena_ativa():
+                        jogador.vel_rinha = seletor_vel.value
+                        jogador.dif_rinha = seletor_dificuldade.value
+                        await asyncio.sleep(0.5) 
+                    # ----------------------------------------
+                    break
 
     page.run_task(loop_batalha)
 
